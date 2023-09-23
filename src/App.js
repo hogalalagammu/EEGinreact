@@ -58,8 +58,9 @@ class EEGPlot extends Component {
     const thetaWave = 0.2 * Math.random() * Math.sin(2 * Math.PI * 4 * currentTime + 0.2); // Theta wave (4 Hz)
     const alphaWave = 0.2 * Math.random() * Math.sin(2 * Math.PI * 8 * currentTime + 0.3); // Alpha wave (8 Hz)
     const betaWave = 0.2 * Math.random() * Math.sin(2 * Math.PI * 16 * currentTime + 0.4); // Beta wave (16 Hz)
+    const gammaWave = 0.2 * Math.random() * Math.sin(2 * Math.PI * 32 * currentTime + 0.5); // Gamma wave (32 Hz)
 
-    newBrainwaveData.push({ time: currentTime, Delta: deltaWave, Theta: thetaWave, Alpha: alphaWave, Beta: betaWave });
+    newBrainwaveData.push({ time: currentTime, Delta: deltaWave, Theta: thetaWave, Alpha: alphaWave, Beta: betaWave, Gamma: gammaWave });
 
     // Update EEG density data (EEG density graph)
     const newEEGDensityData = Array.from({ length: numChannels }, (_, i) => ({
@@ -101,7 +102,7 @@ class EEGPlot extends Component {
 
     return (
       <div>
-         <h1>Brainwave Data</h1>
+        <h1>Brainwave Data</h1>
         <div className="brainwave-chart">
           <ResponsiveContainer width="100%" height={400}>
             <LineChart data={brainwaveData}>
@@ -113,6 +114,7 @@ class EEGPlot extends Component {
               <Line dataKey="Theta" stroke="#82ca9d" name="Theta" />
               <Line dataKey="Alpha" stroke="#ffc658" name="Alpha" />
               <Line dataKey="Beta" stroke="#d34141" name="Beta" />
+              <Line dataKey="Gamma" stroke="#ff5733" name="Gamma" /> {/* Add this line for Gamma */}
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -130,9 +132,11 @@ class EEGPlot extends Component {
               <Bar dataKey="Theta" fill="#82ca9d" name="Theta" />
               <Bar dataKey="Alpha" fill="#ffc658" name="Alpha" />
               <Bar dataKey="Beta" fill="#d34141" name="Beta" />
+              <Bar dataKey="Gamma" fill="#ff5733" name="Gamma" /> {/* Add this bar for Gamma */}
             </BarChart>
           </ResponsiveContainer>
         </div>
+        
         <h1>EEG Data</h1>
         <div className="eeg-chart">
           <ResponsiveContainer width="100%" height={400}>
@@ -158,8 +162,6 @@ class EEGPlot extends Component {
             </LineChart>
           </ResponsiveContainer>
         </div>
-
-       
       </div>
     );
   }
